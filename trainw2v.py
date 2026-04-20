@@ -54,18 +54,13 @@ nltk.download('punkt')
 sentences = sent_tokenize(docs)
 sentences = [word_tokenize(sentences.lower()) for sentences in sentences]
 
-# train model
 model = Word2Vec(sentences,vector_size=100, window=5, min_count=1, workers=4)
-# summarize the loaded model
 print(model)
-# summarize vocabulary
 words = list(model.wv.index_to_key)
 print(words[:50])
-# access vector for one word
 print(model.wv['dinosaur'])
-# save model
+
 model.save('dino_model.bin')
-# load model
 new_model = Word2Vec.load('dino_model.bin')
 analogy1 = new_model.wv.most_similar(positive=["reptile", "bird"],negative = ["dinosaur"])
 print(analogy1)
